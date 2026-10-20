@@ -1,0 +1,33 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DataBucket",
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:PutObject", "s3:ListBucket"],
+      "Resource": ["arn:aws:s3:::BUCKET_NAME", "arn:aws:s3:::BUCKET_NAME/*"]
+    },
+    {
+      "Sid": "EmrClusters",
+      "Effect": "Allow",
+      "Action": [
+        "elasticmapreduce:RunJobFlow",
+        "elasticmapreduce:DescribeCluster",
+        "elasticmapreduce:ListClusters",
+        "elasticmapreduce:ListSteps",
+        "elasticmapreduce:DescribeStep",
+        "elasticmapreduce:AddTags"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "PassEmrRoles",
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": [
+        "arn:aws:iam::ACCOUNT_ID:role/EMR_DefaultRole",
+        "arn:aws:iam::ACCOUNT_ID:role/EMR_EC2_DefaultRole"
+      ]
+    }
+  ]
+}
